@@ -5,7 +5,7 @@ from rest_framework.response import Response
 
 from base.tasks import is_authenticated, is_superuser
 
-from asns.apis import get_exist_asn
+from asns.tasks import get_exist_asn
 from asns.models import ASNHeader
 from asns.commons import ASN_STATUS
 from rest_framework import authentication, permissions
