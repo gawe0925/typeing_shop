@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from base.tasks import is_authenticated
 from products.models import Product
 from orders.models import Cart, Order, OrderLine, Payment
-from orders.apis import is_valid_add
+from orders.tasks import is_valid_add
 from orders.forms import PaymentForm
 from orders.commons import ORDER_STATUS, PAYMENT_STATUS
 

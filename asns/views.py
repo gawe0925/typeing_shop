@@ -27,7 +27,7 @@ class ASNDetailView(APIView):
         data = self.request.data
         
         try:
-            data['brand']
+            data['order_serial_number']
         except:
             return Response({"error" : "none data"}, status=400)
         

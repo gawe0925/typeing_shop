@@ -1,4 +1,3 @@
-from tabnanny import verbose
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
@@ -48,10 +47,12 @@ class UserManager(BaseUserManager):
         return user
     
     def create_superuser(self, password, email, **kwargs):
+        kwargs['is_staff'] = True
         kwargs['is_superuser'] = True
         return self._create_user(password, email, **kwargs)
 
     def create_user(self, password, email, **kwargs):
+        kwargs['is_staff'] = False
         kwargs['is_superuser'] = False
         return self._create_user(password, email, **kwargs)
 
@@ -60,6 +61,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, verbose_name='Email')
     # username = models.CharField(null=True, blank=True, max_length=20, verbose_name='User Name')
     phone = models.CharField(null=True, blank=False, max_length=10, verbose_name='Phone Number')
+    is_staff = models.BooleanField(default=False, verbose_name='Is Staff')
     is_superuser = models.BooleanField(default=False, verbose_name='Is Admin')
     date_joined = models.DateField(auto_now_add=True, verbose_name='Date Joined')
     last_login = models.DateTimeField(auto_now=True, verbose_name='Last Login Time')
@@ -79,6 +81,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_user(self):
         return self.email
+
+    def is_staff(self):
+        return self.is_staff
 
     def is_admin(self):
         return self.is_superuser

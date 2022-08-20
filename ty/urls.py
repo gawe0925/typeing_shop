@@ -16,6 +16,13 @@ Including another URLconf
 from django.urls import include, path
 from django.contrib import admin
 
+from asns.views import *
+from orders.views import *
+from members.views import *
+from products.views import *
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('add_user/', AddUserView.as_view())
 ]
